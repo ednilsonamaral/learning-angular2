@@ -145,3 +145,8 @@ Também conseguimos escutar um evento, click no link/botão, etc.
 
 
 ### Two-way data binding: `[(ngModel)]="propriedade"`
+
+
+## Links das aulas
+
+- [Curso de Angular 2](https://www.youtube.com/playlist?list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G), da Loiane Groner
