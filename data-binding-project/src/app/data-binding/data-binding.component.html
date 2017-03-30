@@ -1,4 +1,4 @@
-<section class="property-binding">
+<!-- <section class="property-binding">
   <article>
     <h3>Interpolation / Interpolação</h3>
     <p>String renderizada com interpolação: <a href="{{ url }}" target="_blank">{{ url }}</a>.</p>
@@ -42,5 +42,62 @@
         </div>
       </div>
     </div>
+  </article>
+</section>
+
+<section class="event-binding">
+  <article>
+    <h3>Event Binding</h3>
+
+    <div>
+      <button (click)="onClick()">Clique aqui, parça!</button>
+
+      <br><br>
+
+      <input type="text" (keyup.enter)="onSave(campo.value)" (blur)="onSave(campo.value)" #campo>
+
+      <div>Conteúdo Salvo: {{ conteudoSalvo }}</div>
+    </div>
+  </article>
+</section>
+
+<br>
+<br>
+<br>
+<br>
+<br>-->
+
+<!--<section class="two-way-binding">
+  <article>
+    <h3>Two-way data binding</h3>
+
+    <div>
+      <input type="text" [value]="nome" (input)="nome = $event.target.value">
+      <input type="text" [ngModel]="nome" (ngModelChange)="nome = $event">
+
+      <input type="text" [(ngModel)]="nome" (ngModelChange)="nome = $event">
+
+      <p>Você digitou {{ nome }}</p>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div>
+      <input type="text" [(ngModel)]="pessoa.nome">
+      <input type="text" [(ngModel)]="pessoa.idade">
+    </div>
+  </article>
+</section>
+-->
+
+<section class="input-properties">
+  <article>
+    <h3>Input/Ouput Properties</h3>
+
+    <curso></curso>
   </article>
 </section>

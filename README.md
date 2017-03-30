@@ -141,11 +141,46 @@ Pegamos um valor de um atríbuto e conseguimos ter a saída dessa informação e
 
 ### Escutando eventos: `(evento)="handler"`
 
-Também conseguimos escutar um evento, click no link/botão, etc.  
+Também conseguimos escutar um evento, click no link/botão, etc. São valores que vão do template para o componente, quando o usuário interage com a nossa página.
 
 
 ### Two-way data binding: `[(ngModel)]="propriedade"`
 
+É quando nós associamos um modelo, e esse mesmo modelo é atualizada, e quando o componente é modificado o template também é atualizado.
+
+
+## Utilizando Pré-Processadores CSS
+
+Para novos projetos: `ng new novo-projeto --style=stylus` (sass / scss / less / stylus).  
+
+Para projetos em andamento: `ng set defaults.styleExt scss` (scss / less / styl). Porém, ele não atualiza para os componentes já existentes. Só irá mudar quando criamos novos componentes.
+
+
+## Gerando build para produção
+
+Existe dois tipos de builds possíveis com Angular 2, um para **desenvolvimento** e um para **produção**.
+
+`ng build --target=development --environment=dev`  
+`ng build --dev --e=dev`  
+`ng build --dev`  
+
+O *build* vai ser gerado dentro do diretório `./dist/`. O arquivo `./dist/main.bundle.js` contém todo o código do nosso projeto, HTML, componentes, CSS. Já o arquivo `./dist/polyfills.bundle.js` contém um código auxiliar que irá ajudar o browser a renderizar todo o nosso código.
+
+`ng build --target=production --environment=prod`  
+`ng build --prod --e=prod`  
+`ng build --prod`  
+
+
+## Instalando Bibliotecas (Bootstrap, jQuery, Lodash, Materialize, etc)
+
+Na documentação oficial do Angular CLI é possível encontrar manuais de instalação de algumas bibliotecas, como Angular Material, Bootstrap, etc. O exemplo abaixo é de como instalar o Bootstrap.
+
+Comando: `npm install --save bootstrap`  
+
+Os imports de estilos e códigos JS das bibliotecas devemos adicionar no arquivo `angular-cli.json`.
+
+
+## Diretivas
 
 ## Links das aulas
 
