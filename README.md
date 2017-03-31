@@ -103,11 +103,6 @@ export class CursosModule { }
 Caso queiramos criar um novo componente dentro de um módulo de funcionalidade, basta executarmos no terminal o seguinte comando: `ng g c cursos/curso-detalhe`.
 
 
-## Serviços
-
-É por onde iremos nos conectar em um servidor, no back-end. Para criar os arquivos do nosso serviço de forma automática, basta executarmos o comando `ng g s cursos/cursos` no terminal. Onde, **g** é para **gerar** e **s** é a abreviação de **service**.
-
-
 ## Injeção de Dependênica (DI)
 
 É fazer com que o Angular nos forneça automaticamente uma instância de uma determinada classe de serviço. Assim não precisamos criar essa instância manualmente.
@@ -181,6 +176,434 @@ Os imports de estilos e códigos JS das bibliotecas devemos adicionar no arquivo
 
 
 ## Diretivas
+
+São uma forma de passarmos instruções para nossos templates e para nosso código HTML. Elas nos dão um enorme poder.
+
+
+### Diretivas Estruturais
+
+São utilizadas para interagirem com a view e modificam a estrutura do DOM e/ou nosso código HTML. Por exemplo: `*ngFor` (`ng-repeat` do ng1) e `*ngIf`.
+
+
+### Diretivas de Atributos
+
+Não modificam a estrutura do DOM mas interagem com o elemento em que foram aplicadas. Por exemplo: `ng-class` e `ng-style`.
+
+
+### ngIf
+
+Ela possui o mesmo comportamento que a condição `if` tem em linguagens de programação, como no JavaScript, por exemplo.
+
+```html  
+<div *ngIf="cursos.length > 0">
+  <h4>Lista de Cursos Aqui</h4>
+</div>
+```
+
+No exemplo acima, ele só irá exibir a div caso a nossa variável *cursos* tenha algum valor dentro. Ele é recomendado para árvore de elementos grandes.
+
+
+### Property Binding [hidden]
+
+```html  
+
+<div [hidden]="!mostrarCursos">
+  <h4>Lista de Cursos Aqui</h4>
+</div>
+```
+
+Nesse outro exemplo, fazemos a mesma coisa, porém com *property binding*. Ele é recomendado para árvore de elementos pequenos. Uma vantagem do `[hidden]` é que ele é muito menos custoso caso o custo de criar a árvore de elementos seja muito grande.
+
+
+### ngSwitch e ngSwitchCase
+
+Funciona da mesma maneira que o `switch case` das linguagens de programação, como por exemplo, o JavaScript. Por exemplo:
+
+```html  
+<nav class="navbar navbar-dark bg-primary">
+  <div class="nav navbar-nav">
+    <a class="nav-item nav-link"
+       [class.active]="aba == 'home'"
+       (click)="aba = 'home'">Home</a>
+    <a class="nav-item nav-link"
+      [class.active]="aba == 'mapa'"
+      (click)="aba = 'mapa'">Mapa</a>
+    <a class="nav-item nav-link"
+    [class.active]="aba == 'lista'"
+    (click)="aba = 'lista'">Lista</a>
+  </div>
+</nav>
+
+<div class="container" [ngSwitch]="aba"  >
+  <p *ngSwitchCase="'mapa'">Modo Mapa ativado</p>
+  <p *ngSwitchCase="'lista'">Modo Lista ativado</p>
+  <p *ngSwitchDefault>Home</p>
+</div>
+```
+
+
+### ngFor
+
+Permite que seja iterado um array através de um loop for. É similar ao loop for que utilizamos nas linguagens de programação, como por exemplo, o JavaScript.
+
+```html  
+<ul>
+  <li *ngFor="let curso of cursos, let i = index">{{ i }} - {{ curso }}</li>
+</ul>
+```
+
+
+### Sobre o * e template
+
+```html  
+<ul>
+  <li *ngFor="let curso of cursos, let i = index">{{ i }} - {{ curso }}</li>
+</ul>
+
+
+<h5>Removendo o * e usando template</h5>
+
+<ul>
+  <li template="ngFor let curso of cursos, let i = index">{{ i }} - {{ curso }}</li>
+</ul>
+
+<ul>
+  <template ngFor [ngForOf]="cursos" let-curso let-i="index">
+    <li>{{ i }} - {{ curso }}</li>
+  </template>
+</ul>
+```
+
+
+### ngClass
+
+É apenas uma forma de diferente de escrevermos um código similar a *property binding class*.
+
+
+### ngStyle
+
+É uma diretiva estrutural, semelhante a diretiva **ngClass**.
+
+```html  
+<button
+  [ngStyle]="{
+    'backgroundColor': (ativo ? 'blue' : 'gray'),
+    'color': (ativo ? 'white' : 'black'),
+    'fontWeight': (ativo ? 'bold' : 'normal'),
+    'fontSize': tamanhoFonte + 'px'
+  }"
+
+  (click)="mudarAtivo()"
+>Mudar atributo 'ativo'
+</button>
+```
+
+
+### Operador Elvis (?)
+
+```html  
+<p><strong>Responsável com Elvis:</strong> {{ tarefa.responsavel?.usuario?.nome}}</p>
+```
+
+
+### ng-content
+
+É mais ou menos o mesmo que o **ngTransclude** fazia no Angular 1. Possui duas formas de exibir os dados, sendo:
+
+```html  
+// app.component.html
+<app-exemplo-ng-content>
+  Conteúdo passado para o componente.
+</app-exemplo-ng-content>
+
+// component.html
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Título blablabla
+  </div>
+
+  <div class="panel-body">
+    Texto mimimi
+  </div>
+</div>
+```
+
+Ou então, através de seletores:
+
+```html  
+// app.html
+<app-exemplo-ng-content>
+  <div class="titulo">Título do bangue</div>
+  <div class="corpo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus quia natus ipsum eligendi laboriosam ullam veniam doloremque reiciendis sit, accusamus maiores eius quod a distinctio est deserunt tempora, minus eaque.</div>
+</app-exemplo-ng-content>
+
+// component.html
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <ng-content select=".titulo"></ng-content>
+  </div>
+
+  <div class="panel-body">
+    <ng-content select=".corpo"></ng-content>
+  </div>
+</div>
+```
+
+
+### Diretivas Customizadas
+
+#### ElementRef / Renderer
+
+**ElementRef** faz referência a algum elemento do DOM, enquanto o **Renderer** é o renderizador também responsável por fazer modificações no DOM.
+
+
+```js  
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[fundoAmarelo]'
+})
+export class FundoAmareloDirective {
+
+  constructor(private _elementRef: ElementRef) {
+    console.log(this._elementRef);
+
+    _elementRef.nativeElement.style.backgroundColor = "yellow";
+  }
+
+}
+```
+
+```html  
+<p fundoAmarelo>Texto com fundo amarelinho!</p>
+```
+
+Utilizar **ElementRef** pode trazer algumas vulnerabilidades para a nossa aplicação. Na própria documentação do Angular 2, é recomendado não utilizá-lo! Ao invés dele, é recomendado utilizar o **Renderer**.
+
+```js  
+import { Directive, ElementRef, Renderer } from '@angular/core';
+
+@Directive({
+  selector: '[fundoAmarelo]'
+})
+export class FundoAmareloDirective {
+  constructor(
+    private _elementRef: ElementRef,
+    private _renderer: Renderer) {
+      console.log(this._renderer);
+
+      this._renderer.setElementStyle(
+        this._elementRef.nativeElement, 'background-color', 'yellow'
+      );
+    }
+}
+```
+
+
+#### HostListener / HostBinding
+
+```js  
+import { Directive, HostListener, ElementRef, Renderer } from '@angular/core';
+
+@Directive({
+  selector: '[highlightMouse]'
+})
+
+export class HighlightMouseDirective {
+
+  @HostListener('mouseenter') onmouseover() {
+    this._renderer.setElementStyle(
+      this._elementRef.nativeElement, 'background-color', '#dcdcdc'
+    );
+
+    this._renderer.setElementStyle(
+      this._elementRef.nativeElement, 'cursor', 'not-allowed'
+    );
+  }
+
+  @HostListener('mouseleave') onmouseleave() {
+    this._renderer.setElementStyle(
+      this._elementRef.nativeElement, 'background-color', '#fff'
+    );
+  }
+
+  constructor(
+    private _elementRef: ElementRef,
+    private _renderer: Renderer
+  ) { }
+}
+```
+
+```html  
+<p highlightMouse>Texto com highligth quando passo o mouse!</p>
+```
+
+Ao invés de ficarmos repetindo código, iremos utilizar o **HostBinding**. Exemplo:
+
+```js  
+import { Directive, HostListener, HostBinding, ElementRef, Renderer } from '@angular/core';
+
+@Directive({
+  selector: '[highlightMouse]'
+})
+
+export class HighlightMouseDirective {
+
+  @HostListener('mouseenter') onmouseover() {
+    this.backgroundColor = '#dcdcdc';
+    this.cursorMouse = 'not-allowed';
+  }
+
+  @HostListener('mouseleave') onmouseleave() {
+    this.backgroundColor = '#fff';
+  }
+
+  @HostBinding('style.backgroundColor') backgroundColor: string;
+  @HostBinding('style.cursor') cursorMouse: string;
+
+  constructor( ) { }
+}
+```
+
+O **HostListener** vai ficar escutando um determinado evento no hospedeiro da diretiva. Já o **HostBinding** permite que façamos o binding/associção de um atributo à uma variável.
+
+Caso seja necessário realizar alguma operação/manipulçãoa antes de definirmos o binding, podemos utilizar os getters and setters. Exemplo:
+
+```js  
+@HostBinding('style.cursor') get setCursor() {
+  return this.cursorMouse;
+}
+
+private cursorMouse: string;
+```
+
+
+#### Input e Property Binding
+
+```js  
+import { Directive, HostListener, HostBinding, ElementRef, Renderer, Input } from '@angular/core';
+
+@Directive({
+  selector: '[highlight]'
+})
+
+export class HighlightDirective {
+  @HostListener('mouseenter') onmouseover() {
+    this.backgroundColor = this.highlightColor;
+    this.cursorMouse = 'not-allowed';
+  }
+
+  @HostListener('mouseleave') onmouseleave() {
+    this.backgroundColor = this.defaultColor;
+  }
+
+  @HostBinding('style.backgroundColor') backgroundColor: string;
+  @HostBinding('style.cursor') cursorMouse: string;
+
+  @Input() defaultColor: string = '#fff';
+  @Input () highlightColor: string = '#dcdcdc';
+
+  constructor( ) { }
+
+  ngOnInit() {
+    this.backgroundColor = this.defaultColor;
+  }
+}
+```
+
+
+Mas, caso queiramos simplificar nosso código, precisaremos fazer conforme exemplo:
+
+```html  
+<p [highlight]="'red'" [defaultColor]="'grey'">
+  Texto com highlight com cores customizadas.
+</p>
+```
+
+```js  
+import { Directive, HostListener, HostBinding, ElementRef, Renderer, Input } from '@angular/core';
+
+@Directive({
+  selector: '[highlight]'
+})
+
+export class HighlightDirective {
+  @HostListener('mouseenter') onmouseover() {
+    this.backgroundColor = this.highlightColor;
+    this.cursorMouse = 'not-allowed';
+  }
+
+  @HostListener('mouseleave') onmouseleave() {
+    this.backgroundColor = this.defaultColor;
+  }
+
+  @HostBinding('style.backgroundColor') backgroundColor: string;
+  @HostBinding('style.cursor') cursorMouse: string;
+
+  @Input() defaultColor: string = '#fff';
+  @Input ('highlight') highlightColor: string = '#dcdcdc';
+
+  constructor( ) { }
+
+  ngOnInit() {
+    this.backgroundColor = this.defaultColor;
+  }
+}
+```
+
+
+#### ngOnInit
+
+É executado quando o componente inicializar.
+
+```js  
+ngOnInit() {
+  this.backgroundColor = this.defaultColor;
+}
+```
+
+
+#### Criando uma diretiva de estrutura (ngElse)
+
+```js  
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+
+@Directive({
+  selector: '[ngElse]'
+})
+export class NgElseDirective {
+
+  @Input() set ngElse(cond: boolean) {
+    if (!cond) {
+      this._viewContainerRef.createEmbeddedView(this._templateRef);
+    } else {
+      this._viewContainerRef.clear();
+    }
+  }
+
+  constructor(
+    private _templateRef: TemplateRef<any>,
+    private _viewContainerRef: ViewContainerRef
+  ) { }
+
+}
+```
+
+```html  
+<div *ngIf="mostrarCursos" >
+  Lista de cursos aqui.
+</div>
+
+<div *ngElse="mostrarCursos" >
+  Não existem cursos para serem listados.
+</div>
+```
+
+
+## Serviços
+
+É por onde iremos nos conectar em um servidor, no back-end. Para criar os arquivos do nosso serviço de forma automática, basta executarmos o comando `ng g s cursos/cursos` no terminal. Onde, **g** é para **gerar** e **s** é a abreviação de **service**.
+
 
 ## Links das aulas
 

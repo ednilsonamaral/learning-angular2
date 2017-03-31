@@ -1,0 +1,13 @@
+<h4>diretiva-ngclass works!</h4>
+
+<h5>Usando property binding</h5>
+<i class="glyphicon" [class.glyphicon-star]="meuFavorito" [class.glyphicon-star-empty]="!meuFavorito" (click)="onClick()"></i>
+
+<hr>
+
+<h5>Usando ngClass</h5>
+<i class="glyphicon" [ngClass]="{
+  'glyphicon-star': meuFavorito,
+  'glyphicon-star-empty': !meuFavorito
+}"
+(click)="onClick()"></i>

@@ -1,0 +1,33 @@
+<h1>diretivas-customizadas works!</h1>
+
+<p fundoAmarelo>Texto com fundo amarelinho!</p>
+
+<p highlightMouse>Texto com highligth quando passo o mouse!</p>
+
+<p highlight>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eveniet voluptas animi quo fugiat iste laborum quos. Ab, blanditiis vel iste incidunt temporibus recusandae! Ea, porro quod harum voluptatibus! Ullam!</p>
+
+<!--<p highlight [defaultColor]="'green'" [highlightColor]="'red'">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet eveniet voluptas animi quo fugiat iste laborum quos. Ab, blanditiis vel iste incidunt temporibus recusandae! Ea, porro quod harum voluptatibus! Ullam!</p>-->
+
+<p [highlight]="'red'" [defaultColor]="'grey'">
+  Texto com highlight com cores customizadas.
+</p>
+
+<br>
+<br>
+<br>
+
+<hr>
+
+<h2>ng-else</h2>
+
+<div *ngIf="mostrarCursos" >
+  Lista de cursos aqui.
+</div>
+
+<div *ngElse="mostrarCursos" >
+  Não existem cursos para serem listados.
+</div>
+
+<br>
+
+<button (click)="onMostrarCursos()">Mostrar ou esconder cursos</button>
