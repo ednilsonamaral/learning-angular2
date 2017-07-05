@@ -590,11 +590,11 @@ export class NgElseDirective {
 ```
 
 ```html  
-<div *ngIf="mostrarCursos" >
+<div *ngIf="mostrarCursos">
   Lista de cursos aqui.
 </div>
 
-<div *ngElse="mostrarCursos" >
+<div *ngElse="mostrarCursos">
   Não existem cursos para serem listados.
 </div>
 ```
@@ -603,6 +603,15 @@ export class NgElseDirective {
 ## Serviços
 
 É por onde iremos nos conectar em um servidor, no back-end. Para criar os arquivos do nosso serviço de forma automática, basta executarmos o comando `ng g s cursos/cursos` no terminal. Onde, **g** é para **gerar** e **s** é a abreviação de **service**.
+
+Enquanto os componentes são responsáveis pela iteração com o usuário, os serviços devem possuir a comunicação com o back-end e ter as lógicas de negócio.
+
+
+### Padrão Singleton
+
+É quando criamos um mesmo serviço em diferentes módulos de nossa aplicação, porém a aplicação realiza a chamada desse serviço uma única vez, independente do número de instâncias.
+
+Se optarmos por mostrar o nosso serviço para toda a aplicação, então devemos declarar ele dentro de `app.module.ts`. Mas, caso queiramos que ele fique vísivel apenas para os módulos de funcionalidades, então devemos declará-lo em cada módulo de funcionalidade. Assim os componentes declarados nesse módulo de funcionalidade terão acesso a esse serviço.
 
 
 ## Links das aulas
