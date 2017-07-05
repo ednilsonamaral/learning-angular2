@@ -614,6 +614,24 @@ Enquanto os componentes são responsáveis pela iteração com o usuário, os se
 Se optarmos por mostrar o nosso serviço para toda a aplicação, então devemos declarar ele dentro de `app.module.ts`. Mas, caso queiramos que ele fique vísivel apenas para os módulos de funcionalidades, então devemos declará-lo em cada módulo de funcionalidade. Assim os componentes declarados nesse módulo de funcionalidade terão acesso a esse serviço.
 
 
+## Pipes
+
+Os pipes são os filtros que utilizavamos no Angular 1. Ele transforma um valor e podemos mostrar esse valor transformado dentro de um template.
+
+
+### Criar um novo pipe
+
+Para criar um novo pipe via terminal, basta executarmos o comando: `ng g p nome-pipe`.
+
+
+### Pipe "puro"
+
+Ele não olha as modificações que são passadas como pârametros no método `transform` do *pipe*.
+
+
+### Pipe "impuro"
+
+
 ## Links das aulas
 
 - [Curso de Angular 2](https://www.youtube.com/playlist?list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G), da Loiane Groner
