@@ -641,6 +641,9 @@ Serve para a gente conseguir fazer a saída de um valor em um template, mesmo qu
 Esse tipo de pipe é utilizado quando estamos consumindo uma API. Assim não obteremos erro em nossas *requests*.
 
 
+## Rotas
+
+
 ## Links das aulas
 
 - [Curso de Angular 2](https://www.youtube.com/playlist?list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G), da Loiane Groner
