@@ -631,6 +631,15 @@ Ele não olha as modificações que são passadas como pârametros no método `t
 
 ### Pipe "impuro"
 
+Mesmo quando o valor recebido pelo pipe, ele continua funcionando, continua de olho nas mudanças realizadas nesse valor.
+
+
+### Pipe Async
+
+Serve para a gente conseguir fazer a saída de um valor em um template, mesmo que esse valor demore um pouco para ter sua saída.
+
+Esse tipo de pipe é utilizado quando estamos consumindo uma API. Assim não obteremos erro em nossas *requests*.
+
 
 ## Links das aulas
 
